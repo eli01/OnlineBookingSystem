@@ -1,0 +1,29 @@
+/*我自定义的css */
+.time-select{
+	width:90px;
+	margin:5px auto;
+	height:30px;
+}
+.receipt{
+	font-weight:bold;
+	font-family:"黑体";
+}
+.editTableInput{
+
+}
+.pielabel1{
+	background-color:#F38630;
+	width:100px;
+	height:30px;
+}
+.pielabel2{
+	background-color:#E0E4CC;
+	width:100px;
+	height:30px;
+}
+.pielabel3{
+	background-color:#69D2E7;
+	width:100px;
+	height:30px;
+}
+

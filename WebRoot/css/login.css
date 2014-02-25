@@ -1,0 +1,86 @@
+/* 报销系统登陆界面样式表 */
+body{
+	font-family:"Times New Roman", Times, serif;
+	margin:20px auto;
+	width:358px;
+	font-size:14px;
+}
+div.wrapper{
+	background-image:url(../imges/login/bg.gif);/*背景图片*/
+	background-repeat:no-repeat;/*只用一张不需重复*/
+	width:348px;
+	height:384px;
+	margin-left:4px;
+	padding-top:75px;/*内边距*/
+}
+div.ribbon{
+	background-image:url(../imges/login/ribbon.png);/*装饰用的彩带*/
+	background-repeat:no-repeat;/*不重复*/
+	width:358px;
+	height:45px;
+	float:left;/*图像向左浮动*/
+	margin-top:25px;
+	margin-left:0px;
+	padding-left:25px;
+	padding-top:5px;
+	color:#FFFFFF;/*文本颜色为白色*/
+	font-weight:bold;/*字体加粗*/
+}
+div.logo{
+	background:url(../imges/login/logo.png);/*logo的图片*/
+	background-repeat:no-repeat;/*不重复*/
+	width:330px;
+	height:115px;
+}
+/*登录空间的样式*/
+div.loginwrapper{
+	margin-left:40px;
+}
+span.usertext{
+	color:#478fab;
+	font-weight:bold;
+}
+input.textbox{
+	background:url(../imges/login/text_field.png) 0px -25px ;	
+	/*background-size:200px 20px;*/
+	background-repeat:no-repeat;
+	width:160px;
+	height:20px;
+	border:0px;/*边框不可见*/
+	padding-top:5px;
+	padding-left:4px;
+}
+
+input.textbox:hover{/*悬停时的样式*/
+	background:url(../imges/login/text_field.png) 0px 0px ;
+	border:0px;
+}
+div.bottomwrapper{
+	margin-left:40px;
+	margin-top:80px;
+}
+/*连接的样式*/
+a:link, a:visited{
+	color:#FFFFFF;/*链接被选中前和被选中后为白色字体*/
+	text-decoration:none;
+}
+a:hover{
+	color:#95ddf9;
+}
+/*按钮的样式*/
+input.button{
+	background:url(../imges/login/login_btn.png) 0px 0px;
+	width:92px;
+	height:31px;
+	border:0px;
+	float:right;
+	margin-right:20px;
+	margin-top:5px;
+}
+input.button:hover{/*鼠标悬停*/
+	background:url(../imges/login/login_btn.png) 0px -31px;
+}
+input.button:active{/*按钮被选择*/
+	background:url(../imges/login/login_btn.png) 0px -62px;
+}
+

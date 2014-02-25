@@ -1,0 +1,94 @@
+作者：孟庆申
+时间：2013.4.6
+简介：以下为粗略的思路，怕想法忘记想什么写什么，切勿找逻辑！
+1.在转之前就要设置内置对象request的默认字符集			
+request.setCharacterEncoding("utf-8");
+request.getRequestDispatcher("OBStart.jsp?ID="+str[0]+"&Bname="+str[1]).forward(request, response);
+
+2.增加一个session值时不用字符串的话会报错！
+hs.setAttribute("OBNum", fbc.getOBNum()+"");
+
+3.保存三种方案
+1>频繁连接数据库
+优点：用户可以离开系统，登录时继续上次未完的操作
+缺点：中途放弃的话还要去数据库中删除
+2>session
+优点：数据库负荷小
+缺点：不稳定，同时可能造成服务器端session占用内存太多
+3>先保存在本地，最后再统统提交到数据库，链接次数少（不安全未采用）
+
+4. HTML中设置输入框为只读状态的方法
+在设计网页的时候，有时候我们需要将输入框设置为只读状态，即其中的内容不可编辑，实现这种设计的方法有两种，分别是使用input的disable和readonly两个属性，不过他们之前还是有一些区别的。
+<INPUT   TYPE= "text "   readonly= "true "   value= "这是ReadOnly的！ ">
+<INPUT   TYPE= "text "   disabled= "true "   value= "这是Disabled的！ ">
+可以看到，虽然两种都是让INPUT的内容不能被用户编辑，但是对于后期的美工处理就有问题了！
+
+比如：
+<style>
+input
+{
+color:blue;
+}
+</style>
+
+这样一来：
+只有ReadOnly的那个文本是蓝色的！
+Disabled是按系统设置的Disabled颜色来设置前景色的，CSS对其无效！
+另外，readonly和disabled还有一个不同点就是，当input属性为readonly时，提交表单是可以获得input的内容，但是如果是disabled则不能获得所提交的内容，返回值全部为null，所以此处需要注意。要慎用readonly和disabled, 指定了disabled的表单,在submit时,不会把它的值传出去, 如下所示,有两个text,一个是readonly一个是disabled,submit后,只能发送那个不是disabled的,注意地址栏的值. 要保存到本地,因为submit了,不然,看不到效果.
+<input type="text" value="只读是可以读取其文字内容的但不能编辑和输入" readonly size="100">
+<input type="text" value="文字变灰不能读取其文字内容也不能编辑和输入" disabled size="100">
+
+5.有大量的意外需要考虑来增强健壮性
+6.有很多用户非法或恶意输入的安全性问题需要考虑
+7.转卡付款方式需要添加一个功能：可以增加需要转卡的对象
+页面本身可以采用循环方式生成代码的，后面再改进
+8.付款方式页面我用了jquery(不是很熟悉)，纯属瞎折腾，把提交功能变复杂了，其实可以直接在每个表单内通过链接地址加上一个不同的属性值来区分付款类型就可以了
+不过
+9.付款方式页面中“保存”时用隐藏表单的属性值完成区别保存功能，“下一步”用jquery完成区别功能，来区别地生成时间窗口界面
+10.安全性有待全面完善（比如直接输入地址和属性值非法登录，需要用session判断的方式拦截）
+11.保存后该页面数据就看不到了，得想一个更好的方法（袁老师的建议？）
+12.时间选择页面的情况是哟那个js来生成还是在服务区段生成，这是一个问题！（考虑到数据生成页面的部分数据来自数据库，暂时还是由服务器端来完成，不过这是一个笨办法，可以用jquery实现部分代码的替换）
+13.日期应该用js或在服务器端判断一下（瑞年平年，大月小月闰月等）
+14写了半天尽然有问题，先放着（已修改完善）
+<select name="year2" class="time-select">
+				<%
+				int n=6;
+				for(int year=2013;year<year+n;year++){
+					out.println("<option value=\""+year+"\">"+year+"</option>");
+				}
+				%>
+				</select>
+				&nbsp;年&nbsp;&nbsp;&nbsp; 
+				<select name="month2" class="time-select">
+				<% 
+				for(int month=1;month<=12;month++){
+					if(month<10){
+						out.println(" <option value="+month+">0"+month+"</option>");
+					}else{
+						out.println(" <option value=\""+month+"\">"+month+"</option>");
+					}
+				}
+				%>
+				</select>
+				&nbsp;月&nbsp;&nbsp;&nbsp; 
+				<select name="day2" class="time-select">
+				<%
+				for(int day=1;day<32;day++){
+					if(day<10){
+						out.println("<option value=\""+day+"\">0"+day+"</option>");		
+					}else{
+						out.println("<option value=\""+day+"\">"+day+"</option>");	
+					}
+				}
+				%>
+				</select>
+				
+				<script language="Javascript">
+					if (this.amTime.month2!="")
+					{
+						nowtime();
+					}
+				</script>
+15.需要用js控制当该时间段预约人数满时用户不可再点击预约（弹出对话框提示）
+16.保存成功后要有提示功能	
+17.后面用强大的jquery!	至于时间嘛……这个个……		
